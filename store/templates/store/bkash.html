@@ -1,0 +1,38 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div>
+  <div>
+    <ol>
+      <li>Go to your bKash app or Dial *247#</li>
+      <li>Choose “Send money” and must give ingame name in reference</li>
+      <li>Enter below bKash Account Number</li>
+      <li>Enter total amount</li>
+      <li>Now enter your bKash Account PIN to confirm the transaction</li>
+      <li>Copy Transaction ID from payment confirmation message and paste that Transaction ID below bKash "Send Money"
+        fee
+        will be added with net price.</li>
+    </ol>
+  </div>
+  <p class="text-success">You Need to send us <strong>Tk. {{ total_price }}</strong></p>
+  <p style="margin-bottom: 0px;">Account Type: <strong>Personal</strong></p>
+  <p>Account Number: 01842797801</p>
+  <hr>
+  <form action="{% url 'place_order' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="bkashNumber">Your bKash Number</label>
+      <input type="text" class="form-control" id="bkashNumber" aria-describedby="number" placeholder="Number.."
+        required>
+      <small id="number" class="form-text text-muted">We'll never share your number with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="transactionID">Your bKash Transaction ID</label>
+      <input type="text" class="form-control" id="transactionID" placeholder="Transaction ID..." required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+
+{% endblock content %}
